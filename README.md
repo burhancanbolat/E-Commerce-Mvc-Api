@@ -1,7 +1,7 @@
 # PulsarECommerce
 
 E-Ticaret Uygylamasıdır.
-Reyon > Kategori > Ürün şeklinde katalog yapısı vardır
+Ana Kategori > Kategori > Ürün şeklinde katalog yapısı vardır
 Üyelik sistemi vardır. 
 Üyeler 
   - e-posta adresleri ile kayıt olurlar.
@@ -14,7 +14,7 @@ Reyon > Kategori > Ürün şeklinde katalog yapısı vardır
 
 Yönetim Paneli
   - Yetkili kullanıcılar girebilir
-  - Reyon yönetimi. CRUD sayfaları
+  - Sonsuz Kategori yönetimi. CRUD sayfaları
   - Kategori yönetimi. CRUD sayfaları
   - Marka yönetimi. CRUD sayfaları
   - Ürün yönetimi. CRUD sayfaları
@@ -25,7 +25,7 @@ Yönetim Paneli
 
 FrontEnd
   - Ana Sayfa, 
-        - Navbar, Logo, Reyon/Kategori , Kullanıcı butonları, Arama
+        - Navbar, Logo, Ana Kategori/Kategori , Kullanıcı butonları, Arama
         - Kampanyalar
         - Önerilen ürünler
         - Markalar
