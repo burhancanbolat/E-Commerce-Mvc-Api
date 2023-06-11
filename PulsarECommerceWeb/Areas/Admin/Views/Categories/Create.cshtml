@@ -1,0 +1,41 @@
+﻿@model Category
+@{
+    ViewData["title"] = "Kayıt Ekleme";
+    var entityName = "Kategori";
+}
+<div class="card">
+    <div class="card-body">
+        <h2>
+            @ViewData["title"]
+
+        </h2>
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item">
+                Ana Kategori
+            </li>
+            @if (ViewBag.Parent is not null)
+            {
+                foreach (var category in (ViewBag.Parent as Category)!.Path)
+                {
+                    <li class="breadcrumb-item">
+                        @category.Name
+                    </li>
+                }
+            }
+        </ul>
+        <form method="post">
+            <input type="hidden" asp-for="ParentId" />
+            <partial name="_FieldsPartial" model="@Model" />
+
+            <hr />
+            <button type="submit" class="btn btn-primary">
+                Kaydet
+            </button>
+            <a class="btn btn-link" asp-action="Index">İptal</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

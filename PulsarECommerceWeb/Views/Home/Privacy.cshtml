@@ -1,0 +1,16 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+
+@section og {
+    <meta property="og:title" content="@Model.Name" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="@Url.Action()" />
+    <meta property="og:image" content="@Model.Photo" />
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to detail your site's privacy policy.</p>
+

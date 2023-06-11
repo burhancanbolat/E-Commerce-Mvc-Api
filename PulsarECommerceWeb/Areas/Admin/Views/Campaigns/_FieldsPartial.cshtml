@@ -1,0 +1,55 @@
+﻿@model Campaign
+
+<div class="mb-3">
+    <label class="form-label" asp-for="CampaignGroupId"></label>
+    <select asp-for="CampaignGroupId" asp-items="@ViewBag.CampaignGroups" class="select2">
+        <option disabled selected value="">[Seçiniz...]</option>
+    </select>
+    <span asp-validation-for="CampaignGroupId"></span>
+</div>
+<div class="mb-3">
+    <label class="form-label" asp-for="Url"></label>
+    <input class="form-control" asp-for="Url">
+    <span asp-validation-for="Url"></span>
+</div>
+<div class="mb-3">
+    <label class="form-label" asp-for="Descriptions"></label>
+    <input class="form-control" asp-for="Descriptions">
+    <span asp-validation-for="Descriptions"></span>
+</div>
+<div class="mb-3">
+    <label class="form-label" asp-for="DateStart"></label>
+    <input class="form-control" asp-for="DateStart">
+    <span asp-validation-for="DateStart"></span>
+</div>
+<div class="mb-3">
+    <label class="form-label" asp-for="DateEnd"></label>
+    <input class="form-control" asp-for="DateEnd">
+    <span asp-validation-for="DateEnd"></span>
+</div>
+
+<div class="mb-3">
+    @if (ViewContext.RouteData.Values["Action"].ToString() == "Edit")
+    {
+        <div class="mb-4">
+            <img src="@Model.Image" width="200" class="img-thumbnail" />
+            <div class="alert alert-info mt-2">
+                Değiştirmek istiyorsanız doldurunuz!
+            </div>
+        </div>
+    }
+    <label for="formFile" class="form-label" asp-for="Image"></label>
+    <input class="form-control" type="file" accept="image/*" id="ImageFile" name="ImageFile">
+    <div class="alert alert-info mt-2">
+        <ul class="list-unstyled mb-0">
+            <li>Yüklenen görseller otomatik olarak 1920&times;1080 piksel boyutuna getirilir</li>
+            <li>En iyi görünüm için 1920&times;1080 ve katları  boyutunda görseller yükleyiniz</li>
+        </ul>
+    </div>
+</div>
+<div class="mb-3">
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" asp-for="Enabled">
+        <label class="form-check-label" asp-for="Enabled"></label>
+    </div>
+</div>

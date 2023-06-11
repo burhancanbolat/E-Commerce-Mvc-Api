@@ -1,0 +1,102 @@
+﻿@model List<ShoppingCartItem>
+@{
+    ViewData["Title"] = "Satın Al";
+}
+
+
+<div class="container">
+    @if (Model.Any())
+    {
+        <div class="row">
+            <div class="col-sm-12 col-md-9">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Görsel
+                            </th>
+                            <th>
+                                Ürün Adı
+                            </th>
+                            <th>
+                                Fiyat
+                            </th>
+                            <th>
+                                Miktar
+                            </th>
+                            <th>
+                                Tutar
+                            </th>
+                            <th>
+                                &nbsp;
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var shopingCartItem in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <img src="@shopingCartItem.Product.Photo" height="90" width="90" style="object-fit: contain" />
+                                </td>
+                                <td>
+                                    <a asp-route="Product" asp-route-id="@shopingCartItem.ProductId" asp-route-name="@shopingCartItem.Product.Name.ToSafeUrlString()">
+                                        @shopingCartItem.Product.Name
+                                    </a>
+                                </td>
+                                <td>
+                                    @shopingCartItem.Product.DiscountedPrice.ToString("c2")
+                                </td>
+                                <td>
+                                    <input type="number" class="form-control quantity-input" data-id="@shopingCartItem.Id" style="width: 80px;" value="@shopingCartItem.Quantity" />
+                                </td>
+                                <td>
+                                    @shopingCartItem.Amount.ToString("c2")
+                                </td>
+                                <td>
+                                    <a asp-action="RemoveFromCart" asp-route-id="@shopingCartItem.Id">
+                                        <i class="fa fa-trash text-danger"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-12 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">Toplam Tutar</div>
+                        <div class="h2 text-success">
+                            @Model.Sum(p => p.Amount).ToString("c2")
+                        </div>
+                        <a class="btn btn-success btn-block" asp-action="Payment">
+                            <i class="fa fa-credit-card"></i> DEVAM ET
+                        </a>
+                    </div>
+                </div>
+                <hr />
+                <div class="text-right">
+                    <a asp-action="ClearShoppingCart" class="btn btn-danger">
+                        Sepeti Temizle
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>Henüz sepetiinzde ürün bulunmamaktadır!</p>
+    }
+</div>
+@section Scripts {
+    <script>
+        $(() => {
+            $('.quantity-input').on('blur', (evt) => {
+                const item = $(evt.currentTarget);
+                window.location = `/Home/UpdateCartItem/${$(item).attr('data-id')}/?qty=${$(item).val()}`;
+            });
+        });
+    </script>
+}

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Order>
+@{
+    ViewData["Title"] = "Yeni Siparişler";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Tarih</th>
+            <th>Kullanıcı</th>
+            <th>Tutar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#detail_@order.Id">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </td>
+                <td>
+                    @order.DateCreated.ToLocalTime().ToShortDateString()
+                </td>
+                <td>
+                    @order.CreatorUser.Name
+                    <br />
+                    <a href="mailto:@order.CreatorUser.UserName">@order.CreatorUser.UserName</a>
+                </td>
+                <td>
+                    @order.GrandTotal.ToString("c2")
+                </td>
+            </tr>
+            <tr id="detail_@order.Id" class="collapse">
+                <td colspan="4">
+                    <div class="card m-3">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Görsel</th>
+                                    <th>Ürün Adı</th>
+                                    <th>Fiyat</th>
+                                    <th>Miktar</th>
+                                    <th>Tutar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var detail in order.OrderDetails)
+                                {
+                                    <tr>
+                                        <td>
+                                            <img src="@detail.Product.Photo" height="120" />
+                                        </td>
+                                        <td>
+                                            @detail.Product.Name
+                                        </td>
+                                        <td>
+                                            @detail.DiscountedPrice.ToString("c2")
+                                        </td>
+                                        <td>
+                                            @detail.Quantity.ToString("n0")
+                                        </td>
+                                        <td>
+                                            @detail.LineTotal.ToString("c2")
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

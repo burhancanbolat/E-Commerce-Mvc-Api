@@ -1,0 +1,26 @@
+﻿$primary: #b20158;
+$success: #8c9c00;
+$danger: #ff0000;
+$border-radius: 1rem;
+
+
+
+@import  '../Areas/Admin/Styles/startbootstrap-sb-admin-2-bs5/vendor/bootstrap/scss/bootstrap.scss';
+
+
+
+.alert ul {
+    @extend .list-unstyled;
+    @extend .mb-0;
+}
+
+.alert-danger {
+    @extend .bg-danger;
+    @extend .text-white;
+}
+.alert ul li:before {
+    @extend .me-2;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f071";
+}

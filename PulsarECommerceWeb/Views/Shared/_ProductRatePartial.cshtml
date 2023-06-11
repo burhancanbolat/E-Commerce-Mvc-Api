@@ -1,0 +1,18 @@
+﻿@model float
+<div class="d-flex flex-nowrap text-warning">
+    @for (int i = 0; i < 5; i++)
+    {
+        if (i < Model && i + 1 > Model)
+        {
+            <i class="fa fa-star-half-empty"></i>
+        }
+        else if (i < Model)
+        {
+            <i class="fa fa-star"></i>
+        }
+        else
+        {
+            <i class="fa fa-star-o"></i>
+        }
+    }
+</div>

@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Category>
+@{
+
+}
+<ul class="navbar-nav ml-auto mr-auto">
+    @foreach (var category in Model)
+    {
+        <li class="nav-item dropdown">
+            @if (category.Children.Any())
+            {
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                    @category.Name
+                </a>
+
+                <div class="dropdown-menu">
+                    @foreach (var child in category.Children)
+                    {
+                        <a class="dropdown-item" asp-route="Category" asp-route-name="@child.Name.ToSafeUrlString()" asp-route-id="@child.Id">
+                            @child.Name
+                        </a>
+                    }
+                </div>
+            }
+            else
+            {
+                <a class="nav-link"  asp-route="Category" asp-route-name="@category.Name.ToSafeUrlString()" asp-route-id="@category.Id" role="button">
+                    @category.Name
+                </a>
+            }
+        </li>
+    }
+</ul>

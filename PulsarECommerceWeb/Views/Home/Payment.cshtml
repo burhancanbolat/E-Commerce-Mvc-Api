@@ -1,0 +1,114 @@
+﻿@model PaymentViewModel
+@{
+    ViewData["Title"] = "Ödeme Ekranı";
+}
+
+<div class="container">
+    <form method="post">
+        <div class="row">
+            <div class="col-sm-12 col-md-9">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Ad Soyad</label>
+                            <input type="text" class="form-control" asp-for="CardHolderName" />
+                            <span class="text-danger" asp-validation-for="CardHolderName"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>Kart Numarası</label>
+                            <input type="text" class="form-control" asp-for="CardNumber" />
+                            <span class="text-danger" asp-validation-for="CardNumber"></span>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-inline">
+                                <label class="mr-2">Son Kullanma T.</label>
+                                <select class="custom-select">
+                                    @for (int i = 1; i <= 12; i++)
+                                    {
+                                        <option>@i.ToString("00")</option>
+                                    }
+                                </select>
+                                <select class="custom-select">
+                                    @for (int i = DateTime.Today.Year; i <= DateTime.Today.Year + 10; i++)
+                                    {
+                                        <option>@i.ToString()</option>
+                                    }
+                                </select>
+                                <div class="form-group">
+                                    <label class="mx-2">Güvenlik Kodu</label>
+                                    <input type="text" class="form-control" asp-for="CVC" />
+                                    <span class="text-danger" asp-validation-for="CVC"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label class="mx-2">Teslimat Adresi Seçiniz</label>
+                                    <select class="custom-select" asp-for="DeliveryAddressId" asp-items="@ViewBag.DeliveryAddresses">
+                                        <option selected value="">Seçiniz...</option>
+                                    </select>
+                                </div>
+                                <label>ya da</label>
+                                <div class="form-group">
+                                    <label>Adres Adı</label>
+                                    <input class="form-control" asp-for="DeliveryAddressName" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Adres</label>
+                                    <textarea class="form-control" asp-for="DeliveryAddressText"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Adres Tarifi</label>
+                                    <input class="form-control" asp-for="DeliveryAddressDirections" />
+                                </div>
+
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="form-group">
+                                    <label class="mx-2">Fatura Adresi Seçiniz</label>
+                                    <select class="custom-select" asp-for="InvoiceAddressId" asp-items="@ViewBag.InvoiceAddresses">
+                                        <option selected value="">Seçiniz...</option>
+                                    </select>
+                                </div>
+                                <label>ya da</label>
+                                <div class="form-group">
+                                    <label>Adres Adı</label>
+                                    <input class="form-control" asp-for="InvoiceAddressName" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Adres</label>
+                                    <textarea class="form-control" asp-for="InvoiceAddressText"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Vergi D.</label>
+                                    <input class="form-control" asp-for="InvoiceTaxOffice" />
+                                </div>
+                                <div class="form-group">
+                                    <label>Vergi No.</label>
+                                    <input class="form-control" asp-for="InvoiceTaxNumber" />
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">Toplam Tutar</div>
+                        <div class="h2 text-success">
+                            @((ViewBag.ShoppingCartItems as IEnumerable<ShoppingCartItem>).Sum(p => p.Amount).ToString("c2"))
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">
+                            <i class="fa fa-credit-card"></i> ÖDEME YAP
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

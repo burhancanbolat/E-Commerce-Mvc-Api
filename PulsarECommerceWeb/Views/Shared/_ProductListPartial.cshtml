@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Product>
+@{
+}
+<div class="row">
+    <div class="col-12 col-md-2">
+        <partial name="_ProductFilterPartial" model="null" />
+    </div>
+    <div class="col-12 col-md-10">
+        <div class="row row-cols-1 row-cols-lg-4 mb-4">
+            @foreach (var product in Model)
+            {
+                <div class="col mb-2">
+                    <partial name="_ProductCardPartial" model="product" />
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+

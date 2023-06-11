@@ -1,0 +1,31 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "startbootstrap-sb-admin-2-bs5@4.1.5-beta.8",
+      "destination": "wwwroot/lib/startbootstrap-sb-admin-2-bs5/",
+      "files": [
+        "js/sb-admin-2.js",
+        "js/sb-admin-2.min.js",
+        "js/demo/chart-area-demo.js",
+        "js/demo/chart-bar-demo.js",
+        "js/demo/chart-pie-demo.js",
+        "js/demo/datatables-demo.js",
+        "vendor/jquery-easing/jquery.easing.compatibility.js",
+        "vendor/jquery-easing/jquery.easing.js",
+        "vendor/jquery-easing/jquery.easing.min.js",
+        "vendor/chart.js/Chart.bundle.js",
+        "vendor/chart.js/Chart.bundle.min.js",
+        "vendor/chart.js/Chart.js",
+        "vendor/chart.js/Chart.min.js",
+        "vendor/datatables/dataTables.bootstrap4.css",
+        "vendor/datatables/dataTables.bootstrap4.js",
+        "vendor/datatables/dataTables.bootstrap4.min.css",
+        "vendor/datatables/dataTables.bootstrap4.min.js",
+        "vendor/datatables/jquery.dataTables.js",
+        "vendor/datatables/jquery.dataTables.min.js"
+      ]
+    }
+  ]
+}

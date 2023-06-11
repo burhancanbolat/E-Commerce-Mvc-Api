@@ -1,0 +1,113 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<partial name="_ToolBarPartial" />
+
+<div class="card">
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-12 col-md-3 border-end">
+                <div class="nav flex-column">
+
+                    <div class="category-item">
+                        <a href="#" class="d-flex text-decoration-none d-flex align-items-center category-btn" data-id="" data-bs-toggle="collapse" data-bs-target="#category_root">
+                            Ana Kategori
+                            <i class="fa fa-angle-down ms-auto children-arrow"></i>
+                        </a>
+
+                        <div id="category_root" class="flex-column ms-4">
+                            @{
+                                populate(ViewBag.Categories as List<Category>);
+                            }
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-12 col-md-9">
+                <table class="datatable table table-striped table-bordered">
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_DataTablesPartial" />
+    <script>
+        $(() => {
+            const createUrl = $('#createButton').attr('href')
+
+            const dt = createDatatable('/admin/categories/tabledata', [
+                { title: 'Ad', data: 'name' },
+                {
+                    title: '',
+                    data: 'id',
+                    render: (r, i, d, t) => {
+                        return `
+<a class="btn btn-link" href="/admin/categories/edit/${d.id}"><i class="fa fa-edit"></i> Düzenle</a>
+<a class="btn btn-link remove-btn" href="/admin/categories/delete/${d.id}"><i class="fa fa-trash"></i> Sil</a>
+`;
+                    }
+                }
+            ], () => {
+
+                $('.remove-btn').on('click', (evt) => {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'UYARI!',
+                        html: 'Eminmisiniz?',
+                        showCancelButton: true,
+                        cancelButtonText: 'İptal',
+                        confirmButtonText: 'Sil'
+
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location = $(evt.currentTarget).attr('href');
+                        }
+                    })
+                    return false;
+                });
+
+            });
+
+            $('.category-btn').on('click', function (e) {
+                const id = $(e.currentTarget).attr('data-id');
+                dt.ajax.url(`/admin/categories/tabledata/${id}`).load();
+                $('#createButton').attr('href', `${createUrl}/${id}` )
+            });
+        })
+    </script>
+}
+
+@functions {
+    void populate(IEnumerable<Category> list)
+    {
+        @foreach (var category in list)
+        {
+            <div class="category-item">
+                <a href="#" class="d-flex text-decoration-none collapsed d-flex align-items-center category-btn" data-id="@category.Id" data-bs-toggle="collapse" data-bs-target="#category_@category.Id">
+                    <span class="text-truncate flex-fill">@category.Name</span>
+                    @if (category.Children.Any())
+                    {
+                        <i class="fa fa-angle-down ms-auto children-arrow"></i>
+                    }
+                </a>
+                @if (category.Children.Any())
+                {
+                    <div id="category_@category.Id" class="flex-column ms-4 collapse">
+                        @{
+                            populate(category.Children);
+                        }
+                    </div>
+                }
+            </div>
+        }
+    }
+}

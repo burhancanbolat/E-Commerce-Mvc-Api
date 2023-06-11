@@ -1,0 +1,41 @@
+﻿@model Product
+@{
+}
+<div class="card h-100 shadow">
+    <img src="@Model.Photo" class="card-img-top" />
+    <div class="card-body">
+        <div class="d-flex flex-column h-100">
+            @if (Model.DiscountRate == 0)
+            {
+                <h2 class="text-black">
+                    @Model.Price.ToString("c0")
+                </h2>
+                <div class="h5 text-muted">
+                    &nbsp;
+                </div>
+            }
+            else
+            {
+                <h2 class="text-success">
+                    @Model.DiscountedPrice.ToString("c0")
+                </h2>
+                <del class="h5 text-muted">
+                    @Model.Price.ToString("c0")
+                </del>
+            }
+            <h4 class="flex-fill">@Model.Name</h4>
+            <div>
+                <partial name="_ProductRatePartial" model="Model.Rating" />
+            </div>
+            <hr />
+            <div class="small">
+                <a class="btn btn-sm btn-outline-primary" asp-route="Product" asp-route-id="@Model.Id" asp-route-name="@Model.Name.ToSafeUrlString()">
+                    <i class="fa fa-search"></i> İncele
+                </a>
+                <a class="btn btn-sm btn-success" asp-controller="Home" asp-action="AddToCart"  asp-route-id="@Model.Id">
+                    <i class="fa fa-shopping-cart"></i> Sepete Ekle
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

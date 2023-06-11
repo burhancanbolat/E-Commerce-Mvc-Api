@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Product>
+@{
+    var currentCategory = ViewBag.Category as Category;
+}
+<div class="container-fluid">
+    <h1>@currentCategory.Name</h1>
+    <hr />
+    @if (currentCategory.Children.Any())
+    {
+        <div class="card shadow-sm mb-3">
+            <div class="card-body d-flex gap-2">
+                @foreach (var child in currentCategory.Children)
+                {
+                    <a class="mx-2 p-2 border bg-light rounded" asp-route="Category" asp-route-name="@child.Name.ToSafeUrlString()" asp-route-id="@child.Id">
+                        @child.Name (@child.Products.Count.ToString("n0"))
+                    </a>
+                }
+            </div>
+        </div>
+    }
+
+    <partial name="_ProductListPartial" model="Model" />
+
+</div>

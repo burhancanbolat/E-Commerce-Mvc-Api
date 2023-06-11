@@ -1,0 +1,23 @@
+﻿@model Campaign
+@{
+    ViewData["title"] = "Kayıt Güncelleme";
+}
+<div class="card">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="Image" />
+            <partial name="_FieldsPartial" model="@Model" />
+            <hr />
+            <button type="submit" class="btn btn-primary">
+                Kaydet
+            </button>
+            <a class="btn btn-link" asp-action="Index">İptal</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <partial name="_Select2Partial" />
+
+}

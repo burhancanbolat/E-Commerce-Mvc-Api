@@ -1,0 +1,22 @@
+﻿@model Feature
+
+<div class="mb-3">
+    <label class="form-label" asp-for="CategoryId"></label>
+    <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="select2">
+        <option disabled selected value="">[Seçiniz...]</option>
+    </select>
+    <span asp-validation-for="CategoryId"></span>
+</div>
+
+<div class="mb-3">
+    <label class="form-label" asp-for="Name"></label>
+    <input class="form-control" asp-for="Name">
+    <span asp-validation-for="Name"></span>
+</div>
+
+<div class="mb-3">
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" asp-for="Enabled">
+        <label class="form-check-label" asp-for="Enabled"></label>
+    </div>
+</div>

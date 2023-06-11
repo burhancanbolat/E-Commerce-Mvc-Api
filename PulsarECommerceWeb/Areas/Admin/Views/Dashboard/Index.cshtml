@@ -1,0 +1,49 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["title"] = "Ana Sayfa";
+}
+
+<div class="row row-cols-4">
+    <div class="col">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <i class="fa fa-shopping-bag fa-5x"></i>
+                <h1>@ViewBag.NewOrders.ToString("n0")<small>Ad.</small></h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="primary-card soft-primary">
+    <div class="card-header">Onaysız Yorumlar</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tarih</th>
+                <th>Gönden</th>
+                <th>Yorum Metni</th>
+                <th>İşlem</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var comment in ViewBag.Comments as IEnumerable<Comment>)
+            {
+                <tr>
+                    <td>@comment.Date.ToLocalTime().ToShortDateString() - @comment.Date.ToLocalTime().ToShortTimeString()</td>
+                    <td>@comment.CreatorUser?.Name</td>
+                    <td>@comment.Text</td>
+                    <td>
+                        <a asp-action="EnableComment" asp-route-id="@comment.Id">
+                            Onayla
+                        </a>
+                        |
+                        <a asp-action="DeleteComment" asp-route-id="@comment.Id">
+                            Sil
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

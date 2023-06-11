@@ -1,0 +1,101 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<ul id="campaignGroupsBar" class="nav nav-pills flex-nowrap justify-content-center my-2 position-relative" style="z-index:2;">
+    @foreach (var campaignGroup in ViewBag.CampaignGroups as IEnumerable<CampaignGroup>)
+    {
+        <li class="nav-item">
+            <a class="nav-link bg-btn text-nowrap" aria-current="page" href="#" data-id="@campaignGroup.Id" style="border-radius: 24px;">@campaignGroup.Name</a>
+        </li>
+    }
+
+</ul>
+<div class="row d-flex">
+    @foreach (var campaignGroup in ViewBag.CampaignGroups as IEnumerable<CampaignGroup>)
+    {
+        var campaigns = campaignGroup.Campaigns.Where(p => p.Enabled && (p.DateStart < DateTime.UtcNow || p.DateStart == null) && (p.DateEnd > DateTime.UtcNow || p.DateEnd == null)).ToList();
+        <div class="d-none bg flex-fill position-relative" data-id="@campaignGroup.Id" style="margin-bottom:-58px; top:-58px;z-index:1; background-image: url('@campaignGroup.BackgroundImage'); background-position: center center; background-size: cover;background-repeat: no-repeat;">
+            <div class="container p-5" style="padding-top: 64px!important;">
+
+
+                <div id="carousel_@campaignGroup.Id" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        @for (int i = 0; i < campaigns.Count; i++)
+                        {
+                            <li data-target="#carousel_@campaignGroup.Id" data-slide-to="@i" class="@(i==0 ? "active" : "")"></li>
+
+                        }
+
+                    </ol>
+                    <div class="carousel-inner">
+                        @foreach (var campaign in campaigns)
+                        {
+                            <div class="carousel-item @(campaign.Id == campaigns.First().Id ? "active" : "")">
+                                <a href="@campaign.Url">
+                                    <img src="@campaign.Image" class="d-block w-100" alt="@campaign.Descriptions">
+                                </a>
+                                <div class="carousel-caption d-none d-md-block">
+                                    <p class="text-white p-2 rounded" style="background-color: rgba(0,0,0,.5)">@campaign.Descriptions</p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <a class="carousel-control-prev" href="#carousel_@campaignGroup.Id" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carousel_@campaignGroup.Id" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="container-fluid py-4">
+
+    <partial name="_ProductListPartial" model="ViewBag.LatestProducts as IEnumerable<Product>" />
+    <div class="container">
+        <div id="brandsBar" class="px-4">
+            @foreach (var brand in ViewBag.Brands as IEnumerable<Brand>)
+            {
+                <div class="mx-1">
+                    <a class="d-flex flex-column align-content-center" asp-route="Brand" asp-route-id="@brand.Id" asp-route-name="@brand.Name.ToSafeUrlString()">
+                        <img src="@brand.Logo" width="120" height="120" class="img-thumbnail" />
+                        <span>@brand.Name</span>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js" integrity="sha512-XtmMtDEcNz2j7ekrtHvOVR4iwwaD6o/FUJe6+Zq+HgcCsk3kj4uSQQR8weQ2QVj1o0Pk6PwYLohm206ZzNfubg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(() => {
+            $(`.bg-btn`).eq(0).addClass('active');
+            $(`.bg`).eq(0).removeClass('d-none');
+            $('.bg-btn').on('click', (e) => {
+
+                $('.bg-btn').removeClass('active');
+                $(e.currentTarget).addClass('active');
+
+                const id = $(e.currentTarget).attr('data-id');
+                $(`.bg`).addClass('d-none');
+                $(`.bg[data-id=${id}]`).removeClass('d-none');
+            });
+
+            $('#brandsBar').slick({
+                slidesToShow: 8,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 2000,
+
+            });
+
+        });
+    </script>
+}

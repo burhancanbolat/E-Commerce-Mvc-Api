@@ -1,0 +1,7 @@
+﻿@model Brand
+<div class="container-fluid">
+    <img class="img-thumbnail mb-2" src="@Model.Logo" alt="@Model.Name" height="200" width="200" style="object-fit: cover" />
+    <h1>@Model.Name</h1>
+    <hr />
+    <partial name="_ProductListPartial" model="Model.Products" />
+</div>

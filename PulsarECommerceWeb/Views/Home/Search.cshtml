@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Product>
+@{
+
+}
+<div class="container-fluid">
+
+    <div class="py-2 mb-3">
+        Arama Sonucu : @Model.Count().ToString("n0")
+    </div>
+
+    <partial name="_ProductListPartial" model="@Model" />
+
+</div>

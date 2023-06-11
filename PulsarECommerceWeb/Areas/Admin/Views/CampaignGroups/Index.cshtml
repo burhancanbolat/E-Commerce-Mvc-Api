@@ -1,0 +1,70 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<partial name="_ToolBarPartial" />
+<div class="card">
+    <div class="card-body">
+        <table class="datatable table table-striped table-bordered">
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_DataTablesPartial" />
+    <script>
+        $(() => {
+            const dt = createDatatable('/admin/CampaignGroups/tabledata', [
+                {
+                    title: 'Görsel',
+                    data: 'backgroundImage',
+                    render: (r, i, d, t) => {
+                        return `<img src='${d.backgroundImage}' height="80" width="80" />`;
+                    }
+                },
+                { title: 'Ad', data: 'name' },
+                {
+                    title: 'Durum',
+                    data: 'enabled',
+                    render: (r, i, d, t) => {
+                        const icon = d.enabled ? `<i class="fa fa-check text-success"></i>` : `<i class="fa fa-times text-danger"></i>`
+                        return `<div class="d-flex align-items-center justify-content-center">${icon}</div>`;
+                    }
+                },
+                { title: 'Kullanıcı', data: 'userName' },
+                { title: 'Kayıt T.', data: 'dateCreated' },
+                {
+                    title: '',
+                    data: 'id',
+                    render: (r, i, d, t) => {
+                        return `
+<a class="btn btn-link" href="/admin/CampaignGroups/edit/${d.id}"><i class="fa fa-edit"></i> Düzenle</a>
+<a class="btn btn-link remove-btn" href="/admin/CampaignGroups/delete/${d.id}"><i class="fa fa-trash"></i> Sil</a>
+`;
+                    }
+                }
+            ], () => {
+
+                $('.remove-btn').on('click', (evt) => {
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'UYARI!',
+                        html: 'Eminmisiniz?',
+                        showCancelButton: true,
+                        cancelButtonText: 'İptal',
+                        confirmButtonText: 'Sil'
+
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location = $(evt.currentTarget).attr('href');
+                        }
+                    })
+                    return false;
+                });
+
+            });
+
+        })
+    </script>
+}

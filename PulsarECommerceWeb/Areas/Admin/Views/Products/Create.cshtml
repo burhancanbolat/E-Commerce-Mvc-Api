@@ -1,0 +1,47 @@
+﻿@model Product
+@{
+    ViewData["title"] = "Kayıt Ekleme";
+}
+<div class="card">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            <partial name="_FieldsPartial" model="@Model" />
+            <hr />
+            <button type="submit" class="btn btn-primary">
+                Kaydet
+            </button>
+            <a class="btn btn-link" asp-action="Index">İptal</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <partial name="_Select2Partial" />
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js" integrity="sha512-KZmyTq3PLx9EZl0RHShHQuXtrvdJ+m35tuOiwlcZfs/rE7NZv29ygNA8SFCkMXTnYZQK2OX0Gm2qKGfvWEtRXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+        $(() => {
+            $('.summernote').summernote({
+                height: 200
+            });
+        })
+
+        var app = angular
+            .module('app', [])
+            .controller('ctrl', ($scope, $http) => {
+                $scope.categorySelected = () => {
+                    if (!$scope.selectedCategory)
+                        return;
+                    $http
+                        .get(`/Admin/Features/GetFeaturesByCategoryid/${$scope.selectedCategory}`)
+                        .then((response) => {
+                            $scope.features = response.data;
+                        });
+                }
+            });
+
+    </script>
+}

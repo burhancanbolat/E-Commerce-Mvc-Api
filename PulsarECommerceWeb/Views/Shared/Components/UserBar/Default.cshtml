@@ -1,0 +1,56 @@
+﻿@model IEnumerable<ShoppingCartItem>
+@{
+}
+
+<div class="text-right d-flex">
+    @if (User.Identity.IsAuthenticated)
+    {
+
+        <div class="dropdown ml-auto mr-4">
+            <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="badge badge-info">@Model.Count().ToString("n0")</span>
+            </button>
+            @if (Model.Any())
+            {
+                <div class="dropdown-menu">
+                    @foreach (var item in Model)
+                    {
+                        <a class="dropdown-item pl-0 small" href="#">
+                            <div class="container-fluid">
+                                <div class="row" style="min-width: 380px;">
+                                    <div class="col-sm-2">
+                                        <img src="@item.Product.Photo" height="40" />
+                                    </div>
+                                    <div class="col-sm-8">@item.Product.Name</div>
+                                    <div class="col-sm-2">@item.Amount.ToString("c2")</div>
+                                </div>
+                            </div>
+                        </a>
+
+                    }
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" asp-controller="Home" asp-action="CheckOut">Satın Al</a>
+                </div>
+            }
+        </div>
+        <span>Hoş geldiniz Sn. @User.FindFirst("Name").Value</span>
+        <a class="mx-2" asp-controller="Account" asp-action="Logout">
+            <i class="fa fa-sign-out"></i>
+            Güvenli Çıkış
+        </a>
+    }
+    else
+    {
+        <a class="mx-2 ml-auto" asp-controller="Account" asp-action="Register">
+            <i class="fa fa-user-plus"></i>
+            @localizer["Button.Register"]
+        </a>
+        <span>|</span>
+        <a class="mx-2" asp-controller="Account" asp-action="Login">
+            <i class="fa fa-sign-in"></i>
+            @localizer["Button.Login"]
+        </a>
+
+    }
+</div>

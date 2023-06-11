@@ -1,0 +1,91 @@
+﻿@model Product
+
+<div class="row" ng-app="app" ng-controller="ctrl">
+    <div class="col-4 mb-3">
+        <label class="form-label" asp-for="CategoryId"></label>
+        <select asp-for="CategoryId" asp-items="@ViewBag.Categories" class="select2" ng-model="selectedCategory" ng-change="categorySelected()">
+            <option disabled selected value="">[Seçiniz...]</option>
+        </select>
+        <span asp-validation-for="CategoryId"></span>
+    </div>
+    <div class="col-8 mb-3">
+        <label class="form-label">Özellikler</label>
+        <table class="table">
+            <tbody>
+                <tr ng-repeat="feature in features">
+                    <td>{{feature.name}}</td>
+                    <td>
+                        <input type="text" name="FeatureValues" class="form-control" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="BrandId"></label>
+        <select asp-for="BrandId" asp-items="@ViewBag.Brands" class="select2">
+            <option selected value="">[Seçiniz...]</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" asp-for="Name"></label>
+        <input class="form-control" asp-for="Name">
+        <span asp-validation-for="Name"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="PriceText"></label>
+        <input class="form-control" asp-for="PriceText">
+        <span asp-validation-for="PriceText"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="DiscountRate"></label>
+        <input class="form-control" asp-for="DiscountRate">
+        <span asp-validation-for="DiscountRate"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" asp-for="Descriptions"></label>
+        <textarea class="summernote" asp-for="Descriptions"></textarea>
+    </div>
+
+    <div class="mb-3">
+        @if (ViewContext.RouteData.Values["Action"].ToString() == "Edit")
+        {
+            <div class="mb-4">
+                <img src="@Model.Photo" width="200" height="200" class="img-thumbnail" />
+                <div class="alert alert-info mt-2">
+                    Değiştirmek istiyorsanız doldurunuz!
+                </div>
+            </div>
+        }
+        <label for="formFile" class="form-label" asp-for="Photo"></label>
+        <input class="form-control" type="file" accept="image/*" id="PhotoFile" name="PhotoFile">
+        <div class="alert alert-info mt-2">
+            <ul class="list-unstyled mb-0">
+                <li>Yüklenen görseller otomatik olarak 800&times;600 piksel boyutuna getirilir</li>
+                <li>En iyi görünüm için 200&times;200 ve katları  boyutunda görseller yükleyiniz</li>
+            </ul>
+        </div>
+    </div>
+    <div class="mb-3">
+        @if (ViewContext.RouteData.Values["Action"].ToString() == "Edit")
+        {
+
+        }
+        <label for="formFile" class="form-label" asp-for="ProductPhotos"></label>
+        <input class="form-control" type="file" accept="image/*" id="PhotoFiles" name="PhotoFiles" multiple>
+        <div class="alert alert-info mt-2">
+            <ul class="list-unstyled mb-0">
+                <li>Yüklenen görseller otomatik olarak 800&times;600 piksel boyutuna getirilir</li>
+                <li>En iyi görünüm için 200&times;200 ve katları  boyutunda görseller yükleyiniz</li>
+            </ul>
+        </div>
+    </div>
+    <div class="mb-3">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" asp-for="Enabled">
+            <label class="form-check-label" asp-for="Enabled"></label>
+        </div>
+    </div>

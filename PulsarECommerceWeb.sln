@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33213.308
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PulsarECommerceWeb", "PulsarECommerceWeb\PulsarECommerceWeb.csproj", "{10B19895-21BD-4DDB-854B-87BEDA123FC6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PulsarECommerceData", "PulsarECommerceData\PulsarECommerceData.csproj", "{5F88E20A-96D6-41B0-A913-66075A20BFD8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MigrationSqlServer", "MigrationSqlServer\MigrationSqlServer.csproj", "{A6ED5728-E25C-473C-BD4C-08404BE5225B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MigrationMySQL", "MigrationMySQL\MigrationMySQL.csproj", "{6F9F980B-FF1B-4E4F-92A1-F81D1252729E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MigrationPostgreSQL", "MigrationPostgreSQL\MigrationPostgreSQL.csproj", "{1DF434A4-2A30-42BC-84A8-6CDCCB6AC8C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PulsarECommerceWebApi", "PulsarECommerceWebApi\PulsarECommerceWebApi.csproj", "{473B153A-7F17-4BD1-926E-C20A1FBFD5B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{10B19895-21BD-4DDB-854B-87BEDA123FC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10B19895-21BD-4DDB-854B-87BEDA123FC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10B19895-21BD-4DDB-854B-87BEDA123FC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10B19895-21BD-4DDB-854B-87BEDA123FC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F88E20A-96D6-41B0-A913-66075A20BFD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F88E20A-96D6-41B0-A913-66075A20BFD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F88E20A-96D6-41B0-A913-66075A20BFD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F88E20A-96D6-41B0-A913-66075A20BFD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6ED5728-E25C-473C-BD4C-08404BE5225B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6ED5728-E25C-473C-BD4C-08404BE5225B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6ED5728-E25C-473C-BD4C-08404BE5225B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6ED5728-E25C-473C-BD4C-08404BE5225B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F9F980B-FF1B-4E4F-92A1-F81D1252729E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F9F980B-FF1B-4E4F-92A1-F81D1252729E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F9F980B-FF1B-4E4F-92A1-F81D1252729E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F9F980B-FF1B-4E4F-92A1-F81D1252729E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DF434A4-2A30-42BC-84A8-6CDCCB6AC8C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DF434A4-2A30-42BC-84A8-6CDCCB6AC8C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DF434A4-2A30-42BC-84A8-6CDCCB6AC8C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DF434A4-2A30-42BC-84A8-6CDCCB6AC8C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{473B153A-7F17-4BD1-926E-C20A1FBFD5B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{473B153A-7F17-4BD1-926E-C20A1FBFD5B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{473B153A-7F17-4BD1-926E-C20A1FBFD5B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{473B153A-7F17-4BD1-926E-C20A1FBFD5B0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B6BBFED1-6366-4964-B0D9-DE9DCC53F1AB}
+	EndGlobalSection
+EndGlobal
